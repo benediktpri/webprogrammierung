@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
+
+body {
+  margin: 0;
+}
+
+.mt {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 900;
+  height: 3em;
+  background-color: #ffcc00;
+  line-height: 3em;
+  padding-left: 2em;
+}
+
+#map {
+  width: 100%;
+  height: 500pt;
+}
