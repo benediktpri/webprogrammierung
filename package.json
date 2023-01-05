@@ -13,6 +13,7 @@
     "dependencies": {
         "css": "^3.0.0",
         "cssparser": "^0.9.4",
+        "firebase": "^9.15.0",
         "glob": "^8.0.3",
         "live-server": "^1.2.2"
     },

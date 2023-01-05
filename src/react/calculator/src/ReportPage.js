@@ -3,39 +3,43 @@ import './report.css';
 
 import { useForm } from "react-hook-form";
 import React from 'react';
+import { pushReport, getReports } from './DBConnector';
 
 function ReportPage() {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    console.log(data);
+    pushReport(data.tiername, data.ort, data.hinweis);
+  }
 
   return (
 
     <div>
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">WankyWombat</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      <nav className="navbar navbar-expand-lg bg-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">WankyWombat</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link" href="index.html">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Report</a>
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">Report</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="maps.html">Map</a>
+              <li className="nav-item">
+                <a className="nav-link" href="maps.html">Map</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="list.html">List</a>
+              <li className="nav-item">
+                <a className="nav-link" href="list.html">List</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Impressum</a>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Impressum</a>
               </li>
             </ul>
           </div>
@@ -44,48 +48,48 @@ function ReportPage() {
 
       <form onSubmit={handleSubmit(onSubmit)}>
 
-        <div class="main">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-sm-3 mt-2 align-self-center">
+        <div className="main">
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-sm-3 mt-2 align-self-center">
                 <h1>Tier</h1>
               </div>
-              <div class="col-12 col-sm-9 align-self-center">
-                <input {...register("tiername")} class="form-control" type="text" placeholder="Name des Tieres" aria-label="Name des Tieres"></input>
+              <div className="col-12 col-sm-9 align-self-center">
+                <input {...register("tiername")} className="form-control" type="text" placeholder="Name des Tieres" aria-label="Name des Tieres"></input>
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-12 col-sm-3 mt-2 align-self-center">
+            <div className="row">
+              <div className="col-12 col-sm-3 mt-2 align-self-center">
                 <h1>Ort</h1>
               </div>
-              <div class="col-12 col-sm-7 align-self-center">
-                <input {...register("ort")} class="form-control" type="text" placeholder="Ort des Tieres" aria-label="Ort des Tieres"></input>
+              <div className="col-12 col-sm-7 align-self-center">
+                <input {...register("ort")} className="form-control" type="text" placeholder="Ort des Tieres" aria-label="Ort des Tieres"></input>
               </div>
-              <div class="col-12 col-sm-2 align-self-center mt-2 mt-sm-0 d-flex just">
-                <a href="#" class="btn btn-primary d-flex justify-content-center">GPS nutzen</a>
+              <div className="col-12 col-sm-2 align-self-center mt-2 mt-sm-0 d-flex just">
+                <a href="#" className="btn btn-primary d-flex justify-content-center">GPS nutzen</a>
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-12 col-sm-3 mt-2 align-self-center">
+            <div className="row">
+              <div className="col-12 col-sm-3 mt-2 align-self-center">
                 <h1>Hinweis</h1>
               </div>
-              <div class="col-12 col-sm-9 align-self-center">
-                <input {...register("hinweis")} class="form-control" type="text" placeholder="Weitere Hinweise"
+              <div className="col-12 col-sm-9 align-self-center">
+                <input {...register("hinweis")} className="form-control" type="text" placeholder="Weitere Hinweise"
                   aria-label="Weitere Hinweise"></input>
               </div>
             </div>
 
 
 
-            <div class="row">
-              <div class="col-12 mt-2 d-flex justify-content-center">
-                <a href="#" class="btn btn-primary d-flex justify-content-center">Foto aufnehmen</a></div>
+            <div className="row">
+              <div className="col-12 mt-2 d-flex justify-content-center">
+                <button onClick={getReports} href="#" className="btn btn-primary d-flex justify-content-center">Foto aufnehmen</button></div>
             </div>
-            <div class="row">
-              <div class="col-12 mt-5 d-flex justify-content-center">
-                <button href="#" class="btn btn-primary d-flex justify-content-center" type="submit">Report Animal</button>
+            <div className="row">
+              <div className="col-12 mt-5 d-flex justify-content-center">
+                <button href="#" className="btn btn-primary d-flex justify-content-center" type="submit">Report Animal</button>
               </div>
             </div>
           </div>
@@ -94,7 +98,7 @@ function ReportPage() {
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+        crossOrigin="anonymous"></script>
 
     </div>
 
