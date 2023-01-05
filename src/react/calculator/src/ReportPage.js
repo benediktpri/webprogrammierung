@@ -8,9 +8,11 @@ import { useQuery } from 'graphql-hooks'
 
 import { useMutation } from 'graphql-hooks'
 
-const UPDATE_USER_MUTATION = `mutation UpdateUser(id: String!, name: String!) {
-  updateUser(id: $id, name: $name) {
-    name
+const UPDATE_USER_MUTATION = `mutation CreateReport($animal: String!, $location: String!, $info: String!) {
+  createReport(animal: $animal, location: $location, info: $info) {
+    animal
+    info
+    location
   }
 }`
 
@@ -36,28 +38,13 @@ function ReportPage() {
   if (loading) return 'Loading...'
   if (error) return 'Something Bad Happened'
 
-  function MyComponent({ id, name }) {
-    const [updateUser] = useMutation(UPDATE_USER_MUTATION)
-    const [newName, setNewName] = useState(name)
-  
-    return (
-      <div>
-        <input
-          type="text"
-          value={newName}
-          onChange={e => setNewName(e.target.value)}
-        />
-        <button
-          onClick={() => updateUser({ variables: { id, name: newName } })}
-        />
-      </div>
-    )
-  }
-
   return (
 
     <div>
-      <div>{JSON.stringify(data)}</div>
+      
+
+
+
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">WankyWombat</a>
@@ -135,6 +122,8 @@ function ReportPage() {
               </div>
             </div>
           </div>
+          
+          <div>{JSON.stringify(data)}</div>
         </div>
       </form>
 
