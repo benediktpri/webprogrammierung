@@ -8,6 +8,18 @@ import { useQuery } from 'graphql-hooks'
 
 import { useMutation } from 'graphql-hooks'
 
+import { Link, Route } from "wouter";
+
+/*import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";*/
+
+import useFetch from "react-fetch-hook";
+import BasicExample from './ASD';
+
 const UPDATE_USER_MUTATION = `mutation CreateReport($animal: String!, $location: String!, $info: String!) {
   createReport(animal: $animal, location: $location, info: $info) {
     animal
@@ -26,8 +38,13 @@ const HOMEPAGE_QUERY = `query Reports {
 
 function ReportPage() {
 
+  /*const { isLoading, data, error } = useFetch("https://swapi.co/api/people/1");*/
+
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+
+  const [updateUser] = useMutation(UPDATE_USER_MUTATION)
+
+  const onSubmit = data => updateUser({ variables: { animal: data.animal, location: data.location, info: data.info } });
 
   const { loading, error, data } = useQuery(HOMEPAGE_QUERY, {
     variables: {
@@ -38,13 +55,15 @@ function ReportPage() {
   if (loading) return 'Loading...'
   if (error) return 'Something Bad Happened'
 
+
+
   return (
 
+
+
+
     <div>
-      
-
-
-
+      <BasicExample></BasicExample>
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">WankyWombat</a>
@@ -75,6 +94,17 @@ function ReportPage() {
         </div>
       </nav>
 
+
+      <div>
+        <Link href="/users/1">
+          <a className="link">Profile</a>
+        </Link>
+
+        <Route path="/about">About Us</Route>
+        <Route path="/users/:name">{(params) => <div>Hello, {params.name}!</div>}</Route>
+        <Route path="/inbox" component={InboxPage} />
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)}>
 
         <div class="main">
@@ -84,7 +114,7 @@ function ReportPage() {
                 <h1>Tier</h1>
               </div>
               <div class="col-12 col-sm-9 align-self-center">
-                <input {...register("tiername")} class="form-control" type="text" placeholder="Name des Tieres" aria-label="Name des Tieres"></input>
+                <input {...register("animal")} class="form-control" type="text" placeholder="Name des Tieres" aria-label="Name des Tieres"></input>
               </div>
             </div>
 
@@ -93,7 +123,7 @@ function ReportPage() {
                 <h1>Ort</h1>
               </div>
               <div class="col-12 col-sm-7 align-self-center">
-                <input {...register("ort")} class="form-control" type="text" placeholder="Ort des Tieres" aria-label="Ort des Tieres"></input>
+                <input {...register("location")} class="form-control" type="text" placeholder="Ort des Tieres" aria-label="Ort des Tieres"></input>
               </div>
               <div class="col-12 col-sm-2 align-self-center mt-2 mt-sm-0 d-flex just">
                 <a href="#" class="btn btn-primary d-flex justify-content-center">GPS nutzen</a>
@@ -105,7 +135,7 @@ function ReportPage() {
                 <h1>Hinweis</h1>
               </div>
               <div class="col-12 col-sm-9 align-self-center">
-                <input {...register("hinweis")} class="form-control" type="text" placeholder="Weitere Hinweise"
+                <input {...register("info")} class="form-control" type="text" placeholder="Weitere Hinweise"
                   aria-label="Weitere Hinweise"></input>
               </div>
             </div>
@@ -122,8 +152,10 @@ function ReportPage() {
               </div>
             </div>
           </div>
-          
+
           <div>{JSON.stringify(data)}</div>
+
+
         </div>
       </form>
 
