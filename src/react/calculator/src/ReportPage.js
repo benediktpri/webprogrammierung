@@ -1,26 +1,51 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './report.css';
 
-import { useForm } from "react-hook-form";
 import React from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useForm } from "react-hook-form";
+import axios from 'axios';
+
 import { pushReport, getReports, getReport } from './DBConnector';
-import usePromise from 'react-use-promise';
 
 
 function ReportPage() {
 
-  const [result, error, state] = usePromise(
-    () => new Promise(resolve => {
-      setTimeout(() => resolve(JSON.stringify(getReports())), 2000);
-    }),
-    []
-  );
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => {
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { register, handleSubmit, formState } = useForm();
+  const cancelRef = useRef();
+
+  useEffect(() => {
+    async function fetchReports() {
+      const cancel = new axios.CancelToken((c) => {
+        cancelRef.current = c;
+      });
+
+      try {
+        const data = await getReports(cancel);
+        setReports(data);
+        setLoading(false);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled');
+        } else {
+          console.log(error);
+        }
+      }
+    }
+    fetchReports();
+
+    return () => {
+      cancelRef.current();
+    };
+  }, [formState]);
+
+  const onSubmit = (data) => {
     console.log(data);
     pushReport(data.tiername, data.ort, data.hinweis);
   }
-
+  
   return (
 
     <div>
@@ -53,7 +78,6 @@ function ReportPage() {
           </div>
         </div>
       </nav>
-
 
       <div className="main">
         <div className="container">
@@ -88,20 +112,25 @@ function ReportPage() {
                   aria-label="Weitere Hinweise"></input>
               </div>
             </div>
-
+            <div className="row">
+              <div className="col-12 mt-2 d-flex justify-content-center">
+                <button href="#" className="btn btn-primary d-flex justify-content-center">Foto aufnehmen</button></div>
+            </div>
             <div className="row">
               <div className="col-12 mt-5 d-flex justify-content-center">
                 <button href="#" className="btn btn-primary d-flex justify-content-center" type="submit">Report Animal</button>
               </div>
             </div>
           </form>
-          <div className="row">
-            <div className="col-12 mt-2 d-flex justify-content-center">
-              <button onClick={getReports} href="#" className="btn btn-primary d-flex justify-content-center">Foto aufnehmen</button></div>
-          </div>
         </div>
         <div>
-        {JSON.stringify(result)}
+          {reports.map((report) => (
+            <div key={report.id} className="report">
+              <span className="name">{report.name}</span>
+              <span className="location">{report.location}</span>
+              <span className="description">{report.description}</span>
+            </div>
+          ))}
         </div>
       </div>
 

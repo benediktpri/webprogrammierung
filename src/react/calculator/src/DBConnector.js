@@ -37,11 +37,13 @@ async function pushReport(name, location, description) {
 
 async function getReports() {
     const querySnapshot = await getDocs(collection(db, "report"));
+    const data = [];
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
-        return doc.data();
+        data.push(doc.data());
     });
+    return data
 }
 
 async function getReport(attribute, comparator, state) {
