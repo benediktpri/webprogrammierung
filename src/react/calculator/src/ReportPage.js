@@ -4,14 +4,60 @@ import './report.css';
 import { useForm } from "react-hook-form";
 import React from 'react';
 
+import { useQuery } from 'graphql-hooks'
+
+import { useMutation } from 'graphql-hooks'
+
+const UPDATE_USER_MUTATION = `mutation UpdateUser(id: String!, name: String!) {
+  updateUser(id: $id, name: $name) {
+    name
+  }
+}`
+
+const HOMEPAGE_QUERY = `query Reports {
+  reports {
+    animal
+    info
+    location
+  }
+}`
+
 function ReportPage() {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
 
+  const { loading, error, data } = useQuery(HOMEPAGE_QUERY, {
+    variables: {
+      limit: 10
+    }
+  })
+
+  if (loading) return 'Loading...'
+  if (error) return 'Something Bad Happened'
+
+  function MyComponent({ id, name }) {
+    const [updateUser] = useMutation(UPDATE_USER_MUTATION)
+    const [newName, setNewName] = useState(name)
+  
+    return (
+      <div>
+        <input
+          type="text"
+          value={newName}
+          onChange={e => setNewName(e.target.value)}
+        />
+        <button
+          onClick={() => updateUser({ variables: { id, name: newName } })}
+        />
+      </div>
+    )
+  }
+
   return (
 
     <div>
+      <div>{JSON.stringify(data)}</div>
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">WankyWombat</a>
