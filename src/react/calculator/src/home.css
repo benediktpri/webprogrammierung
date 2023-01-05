@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
+
+
+.hero {
+    background-image: url("img/snake.jpg");
+    /* width: 100%; */
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* background-attachment: fixed; */
+    /*this makes the text scroll over image  */
+    position: relative;
+    padding-bottom: 50%;
+}
+
+/* #main {
+        color: white;
+    } */
+
+#titel {
+    /* position: absolute;
+        left: 20vw;
+        top: 10vw; */
+    font-family: 'Kanit', sans-serif;
+    color: white;
+    font-size: 6vw;
+    font-weight: 700;
+
+    width: fit-content;
+
+    /* letter-spacing: 0px; */
+    /* word-spacing: 2px; */
+    /* text-decoration: none solid rgb(68, 68, 68); */
+    font-style: italic;
+    /* font-variant: normal; */
+    /* text-transform: none; */
+}
+
+#claim {
+    /* position: absolute;
+        left: 20vw;
+        top: 10vw; */
+    font-family: 'Kanit', sans-serif;
+    color: white;
+    font-size: 4vw;
+    font-weight: 600;
+
+    width: fit-content;
+
+    /* letter-spacing: 0px; */
+    /* word-spacing: 2px; */
+    /* text-decoration: none solid rgb(68, 68, 68); */
+    /* font-style: normal; */
+    /* font-variant: normal; */
+    /* text-transform: none; */
+}
+
+.cards {
+    background-color: #08090b;
+}
+
+.card {
+    background-color: #c2c9b5;
+}
+
+.card-img-top {
+    height: 100%;
+}
+
+.btn {
+    background-color: #596640;
+    border: 0;
+}
+
+.btn-primary:hover{
+    background-color: #89a15c !important;
+}
