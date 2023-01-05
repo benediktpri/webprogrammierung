@@ -3,10 +3,18 @@ import './report.css';
 
 import { useForm } from "react-hook-form";
 import React from 'react';
-import { pushReport, getReports } from './DBConnector';
+import { pushReport, getReports, getReport } from './DBConnector';
+import usePromise from 'react-use-promise';
+
 
 function ReportPage() {
 
+  const [result, error, state] = usePromise(
+    () => new Promise(resolve => {
+      setTimeout(() => resolve(JSON.stringify(getReports())), 2000);
+    }),
+    []
+  );
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
     console.log(data);
@@ -46,10 +54,10 @@ function ReportPage() {
         </div>
       </nav>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
 
-        <div className="main">
-          <div className="container">
+      <div className="main">
+        <div className="container">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
               <div className="col-12 col-sm-3 mt-2 align-self-center">
                 <h1>Tier</h1>
@@ -67,7 +75,7 @@ function ReportPage() {
                 <input {...register("ort")} className="form-control" type="text" placeholder="Ort des Tieres" aria-label="Ort des Tieres"></input>
               </div>
               <div className="col-12 col-sm-2 align-self-center mt-2 mt-sm-0 d-flex just">
-                <a href="#" className="btn btn-primary d-flex justify-content-center">GPS nutzen</a>
+                <button href="#" className="btn btn-primary d-flex justify-content-center">GPS nutzen</button>
               </div>
             </div>
 
@@ -81,26 +89,27 @@ function ReportPage() {
               </div>
             </div>
 
-
-
-            <div className="row">
-              <div className="col-12 mt-2 d-flex justify-content-center">
-                <button onClick={getReports} href="#" className="btn btn-primary d-flex justify-content-center">Foto aufnehmen</button></div>
-            </div>
             <div className="row">
               <div className="col-12 mt-5 d-flex justify-content-center">
                 <button href="#" className="btn btn-primary d-flex justify-content-center" type="submit">Report Animal</button>
               </div>
             </div>
+          </form>
+          <div className="row">
+            <div className="col-12 mt-2 d-flex justify-content-center">
+              <button onClick={getReports} href="#" className="btn btn-primary d-flex justify-content-center">Foto aufnehmen</button></div>
           </div>
         </div>
-      </form>
+        <div>
+        {JSON.stringify(result)}
+        </div>
+      </div>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossOrigin="anonymous"></script>
 
-    </div>
+    </div >
 
 
   );

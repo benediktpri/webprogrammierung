@@ -6,6 +6,8 @@ import {
     setDoc,
     getDocs,
     collection,
+    query,
+    where,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -31,7 +33,6 @@ async function pushReport(name, location, description) {
         description: description
     });
     console.log(`pushed ${name} at ${location} with ${description} to database.`)
-
 }
 
 async function getReports() {
@@ -39,9 +40,8 @@ async function getReports() {
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
-        return doc;
+        return doc.data();
     });
-
 }
 
 async function getReport(attribute, comparator, state) {
@@ -51,6 +51,6 @@ async function getReport(attribute, comparator, state) {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
     });
-    return 
+    return doc;
 }
-export { pushReport, getReports }
+export { pushReport, getReports, getReport }
