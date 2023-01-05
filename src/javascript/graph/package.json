@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node app_copy_benedikt.js",
+    "dev": "nodemon app_copy_benedikt.js"
   },
   "repository": {
     "type": "git",
