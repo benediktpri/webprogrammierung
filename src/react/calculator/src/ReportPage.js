@@ -4,6 +4,8 @@ import './report.css';
 import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { pushReport, getReports } from './DBConnector';
+import { Link } from 'react-router-dom';
+
 
 function ReportPage() {
   const [reports, setReports] = useState([]);
@@ -43,19 +45,29 @@ function ReportPage() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="index.html">Home</a>
+                <Link to="/home">
+                  <a className="nav-link">Home</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Report</a>
+                <Link to="/report">
+                  <a className="nav-link active" aria-current="page">Report</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="maps.html">Map</a>
+                <Link to="/map">
+                  <a className="nav-link">Map</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="list.html">List</a>
+                <Link to="/list">
+                  <a className="nav-link">List</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Impressum</a>
+                <Link to="/imprint">
+                  <a className="nav-link">Impressum</a>
+                </Link>
               </li>
             </ul>
           </div>

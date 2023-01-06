@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 function HomePage() {
 
   var Wombat = require('./img/wombat.jpg');
@@ -54,7 +56,9 @@ function HomePage() {
               <div className="card-body">
                 <h5 className="card-title">Report</h5>
                 <p className="card-text">With the click of a button you can report any dangerous animals.</p>
-                <a href="report.html" className="btn btn-primary d-flex justify-content-center">Report a dangerous animal.</a>
+                <Link to="/report">
+                  <button className="btn btn-primary d-flex justify-content-center">Report a dangerous animal.</button>
+                </Link>
               </div>
             </div>
           </div>
