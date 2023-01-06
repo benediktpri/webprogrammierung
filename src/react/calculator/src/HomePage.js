@@ -23,24 +23,35 @@ function HomePage() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                <Link to="/home">
+                  <a className="nav-link">Home</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="report.html">Report</a>
+                <Link to="/report">
+                  <a className="nav-link active" aria-current="page">Report</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="maps.html">Map</a>
+                <Link to="/map">
+                  <a className="nav-link">Map</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="list.html">List</a>
+                <Link to="/list">
+                  <a className="nav-link">List</a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Impressum</a>
+                <Link to="/imprint">
+                  <a className="nav-link">Impressum</a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
-      </nav><div className="hero">
+      </nav>
+      <div className="hero">
         <div id="main" className="container">
           <div className="row">
             <div id="titel" className="col-12">WankyWombat</div>
