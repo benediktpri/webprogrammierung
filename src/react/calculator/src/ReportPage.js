@@ -1,49 +1,28 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './report.css';
 
-import React from 'react';
-import { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
-import axios from 'axios';
-
-import { pushReport, getReports, getReport } from './DBConnector';
-
+import { pushReport, getReports } from './DBConnector';
 
 function ReportPage() {
-  let timerId;
-  let lastFetchTime = 0;
-
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const { register, handleSubmit, formState } = useForm();
-  const cancelRef = useRef();
+
+  async function fetchReports() {
+    try {
+      const data = await getReports();
+      setReports(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    async function fetchReports() {
-      const cancel = new axios.CancelToken((c) => {
-        cancelRef.current = c;
-      });
-
-      try {
-        const currentTime = Date.now();
-        if (currentTime - lastFetchTime > 60000) {
-          // Only fetch data if at least 60 seconds have passed since the last fetch
-          const data = await getReports(cancel);
-          setReports(data);
-          setLoading(false);
-          lastFetchTime = currentTime;
-        }
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log('Request canceled');
-        } else {
-          console.log(error);
-        }
-      }
-    }
-
-    timerId = setInterval(fetchReports, 10000); // call fetchReports every 1 second
-  }, [formState]);
+    fetchReports();
+  }, []);
 
   const onSubmit = (data) => {
     console.log(data);

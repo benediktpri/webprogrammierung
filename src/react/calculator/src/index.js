@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import ReportPage from './ReportPage';
+import HomePage from './HomePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ReportPage />
+    <HomePage />
   </React.StrictMode>
 );

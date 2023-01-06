@@ -65,7 +65,7 @@
 }
 
 .card-img-top {
-    height: 100%;
+    height: 50%;
 }
 
 .btn {
@@ -73,6 +73,6 @@
     border: 0;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background-color: #89a15c !important;
 }
