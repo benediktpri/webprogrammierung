@@ -10,6 +10,8 @@ import { pushReport, getReports, getReport } from './DBConnector';
 
 
 function ReportPage() {
+  let timerId;
+  let lastFetchTime = 0;
 
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,9 +25,14 @@ function ReportPage() {
       });
 
       try {
-        const data = await getReports(cancel);
-        setReports(data);
-        setLoading(false);
+        const currentTime = Date.now();
+        if (currentTime - lastFetchTime > 60000) {
+          // Only fetch data if at least 60 seconds have passed since the last fetch
+          const data = await getReports(cancel);
+          setReports(data);
+          setLoading(false);
+          lastFetchTime = currentTime;
+        }
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log('Request canceled');
@@ -34,18 +41,15 @@ function ReportPage() {
         }
       }
     }
-    fetchReports();
 
-    return () => {
-      cancelRef.current();
-    };
+    timerId = setInterval(fetchReports, 10000); // call fetchReports every 1 second
   }, [formState]);
 
   const onSubmit = (data) => {
     console.log(data);
     pushReport(data.tiername, data.ort, data.hinweis);
   }
-  
+
   return (
 
     <div>
