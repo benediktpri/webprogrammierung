@@ -15,7 +15,8 @@
         "cssparser": "^0.9.4",
         "firebase": "^9.15.0",
         "glob": "^8.0.3",
-        "live-server": "^1.2.2"
+        "live-server": "^1.2.2",
+        "react-bootstrap": "^2.7.0"
     },
     "devDependencies": {
         "@babel/core": "^7.9.0",
