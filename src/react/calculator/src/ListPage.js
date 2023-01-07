@@ -1,12 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './maps.css';
+import './list.css';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getReports } from './DBConnector';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-function MapPage() {
-    const position = [51.505, -0.09]; // latitude, longitude
+function ListPage() {
+    const [reports, setReports] = useState([]);
+
+    async function fetchReports() {
+        try {
+            const data = await getReports();
+            setReports(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchReports();
+    }, []);
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-light">
@@ -48,26 +61,18 @@ function MapPage() {
                     </div>
                 </div>
             </nav>
-            <div className="mt">Report Map</div>
-            <div id="map">
-                <MapContainer center={position} zoom={13}>
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker position={position}>
-                        <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
-                </MapContainer>
+            <div>
+                {reports.map((report) => (
+                    <div key={report.id} className="report">
+                        <span className="name">{report.name}</span>
+                        <span className="location">{report.location}</span>
+                        <span className="description">{report.description}</span>
+                    </div>
+                ))}
             </div>
-            <script
-                src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-                crossOrigin="anonymous"
-            ></script>
         </div>
+
     );
 }
 
-export default MapPage;
+export default ListPage;

@@ -1,30 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './report.css';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm } from "react-hook-form";
-import { pushReport, getReports } from './DBConnector';
+import { pushReport } from './DBConnector';
 import { Link } from 'react-router-dom';
 
 
 function ReportPage() {
-  const [reports, setReports] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   const { register, handleSubmit, formState } = useForm();
-
-  async function fetchReports() {
-    try {
-      const data = await getReports();
-      setReports(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    fetchReports();
-  }, []);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -118,15 +103,7 @@ function ReportPage() {
             </div>
           </form>
         </div>
-        <div>
-          {reports.map((report) => (
-            <div key={report.id} className="report">
-              <span className="name">{report.name}</span>
-              <span className="location">{report.location}</span>
-              <span className="description">{report.description}</span>
-            </div>
-          ))}
-        </div>
+
       </div>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
