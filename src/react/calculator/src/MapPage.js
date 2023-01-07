@@ -50,6 +50,7 @@ function MapPage() {
         // set default location to Mannheim, Germany if there is an error getting the user's position
         setPosition([49.487459, 8.466039]);
     });
+    
 
 
     return (
