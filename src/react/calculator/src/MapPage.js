@@ -1,12 +1,57 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './maps.css';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getReports } from './DBConnector';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 function MapPage() {
-    const position = [51.505, -0.09]; // latitude, longitude
+    const [position, setPosition] = useState([49.487459, 8.466039]); // default to Mannheim, Germany
+    const [reports, setReports] = useState([]);
+
+    async function fetchReports() {
+        try {
+            const data = await getReports();
+            const parsedData = data.map((report) => {
+                // split location string on ',' and check if there are two numbers
+                const locationParts = report.location.split(',');
+                if (locationParts.length !== 2 || isNaN(locationParts[0]) || isNaN(locationParts[1])) {
+                    // generate random longitude and latitude
+                    const longitude = Math.random() * 180 - 90; // range: -90 to 90
+                    const latitude = Math.random() * 360 - 180; // range: -180 to 180
+                    return {
+                        ...report,
+                        location: [longitude, latitude],
+                    };
+                } else {
+                    // parse location strings as floats
+                    const location = locationParts.map(str => parseFloat(str));
+                    return {
+                        ...report,
+                        location,
+                    };
+                }
+            });
+            setReports(parsedData);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchReports();
+    }, []);
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setPosition([latitude, longitude]);
+    }, () => {
+        // set default location to Mannheim, Germany if there is an error getting the user's position
+        setPosition([49.487459, 8.466039]);
+    });
+
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-light">
@@ -20,28 +65,28 @@ function MapPage() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link to="/home">
-                                    <a className="nav-link">Home</a>
+                                <Link to="/home" className="nav-link">
+                                    Home
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/report">
-                                    <a className="nav-link active" aria-current="page">Report</a>
+                                <Link to="/report" className="nav-link">
+                                    Report
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/map">
-                                    <a className="nav-link">Map</a>
+                                <Link to="/map" className="nav-link">
+                                    Map
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/list">
-                                    <a className="nav-link">List</a>
+                                <Link to="/list" className="nav-link">
+                                    List
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/imprint">
-                                    <a className="nav-link">Impressum</a>
+                                <Link to="/imprint " className="nav-link">
+                                    Impressum
                                 </Link>
                             </li>
                         </ul>
@@ -50,15 +95,31 @@ function MapPage() {
             </nav>
             <div className="mt">Report Map</div>
             <div id="map">
-                <MapContainer center={position} zoom={13}>
+                <MapContainer center={position} zoom={13} maxZoom={18} minZoom={3}>
                     <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     <Marker position={position}>
                         <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
+                            Your location!
                         </Popup>
                     </Marker>
+                    {reports.map((report) => {
+                        if (Array.isArray(report.location) && report.location.length === 2 &&
+                            typeof report.location[0] === 'number' && typeof report.location[1] === 'number') {
+                            return (
+                                <div key={report.id} className="report">
+                                    <Marker position={report.location}>
+                                        <Popup>
+                                            {report.name} <br /> {report.description}
+                                        </Popup>
+                                    </Marker>
+                                </div>
+                            );
+                        } else {
+                            return null;
+                        }
+                    })}
                 </MapContainer>
             </div>
             <script
