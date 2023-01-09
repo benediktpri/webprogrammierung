@@ -27,7 +27,7 @@ function ReportPage() {
     navigator.geolocation.getCurrentPosition((position) => {
       //setLat(position.coords.latitude);
       //setLong(position.coords.longitude);
-      setOrtStr(position.coords.longitude + ", " + position.coords.latitude);
+      setOrtStr(position.coords.latitude + ", " + position.coords.longitude);
 
       console.log("Clicked:"+ ort_str);
 
