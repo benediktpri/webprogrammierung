@@ -33,28 +33,28 @@ function ListPage() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link to="/home">
-                                    <a className="nav-link">Home</a>
+                                <Link to="/home" className="nav-link">
+                                    Home
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/report">
-                                    <a className="nav-link active" aria-current="page">Report</a>
+                                <Link to="/report" className="nav-link">
+                                    Report
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/map">
-                                    <a className="nav-link">Map</a>
+                                <Link to="/map" className="nav-link">
+                                    Map
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/list">
-                                    <a className="nav-link">List</a>
+                                <Link to="/list" className="nav-link active">
+                                    List
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/imprint">
-                                    <a className="nav-link">Impressum</a>
+                                <Link to="/imprint" className="nav-link">
+                                    Impressum
                                 </Link>
                             </li>
                         </ul>

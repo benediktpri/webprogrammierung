@@ -5,11 +5,20 @@ import React, { useState, useEffect } from 'react';
 import { getReports } from './DBConnector';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import L from 'leaflet';
+
 
 function MapPage() {
     const [position, setPosition] = useState([49.487459, 8.466039]); // default to Mannheim, Germany
     const [reports, setReports] = useState([]);
-
+    const redIcon = new L.Icon({
+        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
     async function fetchReports() {
         try {
             const data = await getReports();
@@ -50,7 +59,7 @@ function MapPage() {
         // set default location to Mannheim, Germany if there is an error getting the user's position
         setPosition([49.487459, 8.466039]);
     });
-    
+
 
 
     return (
@@ -76,7 +85,7 @@ function MapPage() {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/map" className="nav-link">
+                                <Link to="/map" className="nav-link active">
                                     Map
                                 </Link>
                             </li>
@@ -86,7 +95,7 @@ function MapPage() {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/imprint " className="nav-link">
+                                <Link to="/imprint" className="nav-link">
                                     Impressum
                                 </Link>
                             </li>
@@ -110,7 +119,7 @@ function MapPage() {
                             typeof report.location[0] === 'number' && typeof report.location[1] === 'number') {
                             return (
                                 <div key={report.id} className="report">
-                                    <Marker position={report.location}>
+                                    <Marker position={report.location} icon={redIcon}>
                                         <Popup>
                                             {report.name} <br /> {report.description}
                                         </Popup>

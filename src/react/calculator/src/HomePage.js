@@ -17,7 +17,7 @@ function HomePage() {
 
 
     <div>
-      <nav collapseOnSelect expand="lg" class="navbar navbar-expand-lg bg-light">
+      <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">WankyWombat</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -28,28 +28,28 @@ function HomePage() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/home">
-                  <a className="nav-link">Home</a>
+                <Link to="/home" className="nav-link active">
+                  Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/report">
-                  <a className="nav-link active" aria-current="page">Report</a>
+                <Link to="/report" className="nav-link">
+                  Report
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/map">
-                  <a className="nav-link">Map</a>
+                <Link to="/map" className="nav-link">
+                  Map
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/list">
-                  <a className="nav-link">List</a>
+                <Link to="/list" className="nav-link">
+                  List
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/imprint">
-                  <a className="nav-link">Impressum</a>
+                <Link to="/imprint" className="nav-link">
+                  Impressum
                 </Link>
               </li>
             </ul>
@@ -76,8 +76,8 @@ function HomePage() {
               <div className="card-body">
                 <h3 className="card-title">Report</h3>
                 <p className="card-text">With the click of a button you can report any dangerous animals.</p>
-                <Link to="/report">
-                  <a className="btn btn-primary d-flex justify-content-center">Report a dangerous animal.</a>
+                <Link to="/report" className="btn btn-primary d-flex justify-content-center">
+                  Report a dangerous animal.
                 </Link>
               </div>
 
@@ -89,8 +89,8 @@ function HomePage() {
               <div className="card-body">
                 <h3 className="card-title">Realtime</h3>
                 <p className="card-text">See a realtime overview of all the reports in your area.</p>
-                <Link to="/map">
-                  <a className="btn btn-primary d-flex justify-content-center">Go to map</a>
+                <Link to="/map" className="btn btn-primary d-flex justify-content-center">
+                  Go to map
                 </Link>
               </div>
             </div>
@@ -101,8 +101,8 @@ function HomePage() {
               <div className="card-body">
                 <h3 className="card-title">Rangers</h3>
                 <p className="card-text">A ranger will be notified and remove the danger.</p>
-                <Link to="/list">
-                  <a className="btn btn-primary d-flex justify-content-center">Go to the list of reports.</a>
+                <Link to="/list" className="btn btn-primary d-flex justify-content-center">
+                  Go to the list of reports.
                 </Link>
               </div>
             </div>
