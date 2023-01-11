@@ -25,7 +25,7 @@ function ReportPage() {
       email: 'felix.2001@web.de' // Emailadress of ranger
     };
     /*e.preventDefau
-    /*emailjs.send('service_sxdzo4f', 'template_0o7vawb', mail_values, 'eY3vlgIfp7iXz3CD0');*/
+    /*emailjs.send('service_sxdzo4f', 'template_0o7vawb', mail_values, 'eY3vlgIfp7iXz3CD0');*/ //no spam pls. only 200 per month
     console.log("Emails send")
   }
 
