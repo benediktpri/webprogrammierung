@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { pushReport } from './DBConnector';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 import { now } from "moment";
 import moment from "moment";
@@ -14,9 +15,19 @@ function ReportPage() {
 
   const { register, handleSubmit, formState } = useForm();
 
+
   const onSubmit = (data) => {
     console.log(data);
     pushReport(data.tiername, ort_str, data.hinweis, moment(now()).format('MMMM Do YYYY, h:mm'));
+    var mail_values = {
+      animal: data.tiername,
+      location: ort_str,
+      info: data.hinweis,
+      email: 'felix.2001@web.de' // Emailadress of ranger
+    };
+    /*e.preventDefau
+    /*emailjs.send('service_sxdzo4f', 'template_0o7vawb', mail_values, 'eY3vlgIfp7iXz3CD0');*/ //no spam pls. only 200 per month
+    console.log("Emails send")
   }
 
   //const [latitude, setLat] = useState('LongitudeDefault');
