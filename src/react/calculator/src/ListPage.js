@@ -67,6 +67,7 @@ function ListPage() {
                         <span className="name">{report.name}</span>
                         <span className="location">{report.location}</span>
                         <span className="description">{report.description}</span>
+                        <span className="description">{report.timestamp}</span>
                     </div>
                 ))}
             </div>

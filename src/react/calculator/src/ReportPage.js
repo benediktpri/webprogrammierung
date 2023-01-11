@@ -7,6 +7,7 @@ import { pushReport } from './DBConnector';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
+import { now, moment } from "moment";
 
 function ReportPage() {
 
@@ -14,7 +15,7 @@ function ReportPage() {
 
   const onSubmit = (data) => {
     console.log(data);
-    pushReport(data.tiername, ort_str, data.hinweis);
+    pushReport(data.tiername, ort_str, data.hinweis, now());
   }
 
   //const [latitude, setLat] = useState('LongitudeDefault');

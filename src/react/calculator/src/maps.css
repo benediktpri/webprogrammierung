@@ -2,18 +2,20 @@
 
 body {
   margin: 0;
+  background-color: #596640;
 }
 
 .mt {
   font-family: 'Kanit', sans-serif;
   font-weight: 900;
+  color: white;
   height: 3em;
-  background-color: #ffcc00;
+  background-color: #596640;
   line-height: 3em;
   padding-left: 2em;
 }
 
 .leaflet-container {
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
 }

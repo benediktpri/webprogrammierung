@@ -25,14 +25,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 
-async function pushReport(name, location, description) {
+async function pushReport(name, location, description, timestamp) {
     // Add a new document in collection "cities"
     await setDoc(doc(db, "report", uuidv4()), {
         name: name,
         location: location,
-        description: description
+        description: description,
+        timestamp: timestamp
     });
-    console.log(`pushed ${name} at ${location} with ${description} to database.`)
+    console.log(`pushed ${name} at ${location} with ${description} at ${timestamp} to database.`)
 }
 
 async function getReports() {

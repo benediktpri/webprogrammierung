@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
+
+body {
+    background-color: #c2c9b5;
+}
+
+.report {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 900;
+    color: white;
+    height: 3em;
+    background-color: #596640;
+    line-height: 3em;
+    padding-left: 2em;
+    border: solid white 1px;
+}
