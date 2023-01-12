@@ -2,11 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './maps.css';
 
 import React, { useState, useEffect } from 'react';
+
 import { getReports } from './DBConnector';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet';
-
+import { now } from "moment";
+import moment from "moment";
 
 function MapPage() {
     const [position, setPosition] = useState([49.487459, 8.466039]); // default to Mannheim, Germany
@@ -103,7 +105,7 @@ function MapPage() {
                     </div>
                 </div>
             </nav>
-            <div className="mt">Report Map</div>
+            <div className="mt">Report Map, today: {moment(now()).format('MMMM Do ')}</div>
             <div id="map">
                 <MapContainer center={position} zoom={13} maxZoom={18} minZoom={3}>
                     <TileLayer

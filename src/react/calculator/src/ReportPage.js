@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
-import { now, moment } from "moment";
+import { now } from "moment";
+import moment from "moment";
 
 function ReportPage() {
 
@@ -17,7 +18,7 @@ function ReportPage() {
 
   const onSubmit = (data) => {
     console.log(data);
-    pushReport(data.tiername, ort_str, data.hinweis, now());
+    pushReport(data.tiername, ort_str, data.hinweis, moment(now()).format('MMMM Do YYYY, h:mm'));
     var mail_values = {
       animal: data.tiername,
       location: ort_str,

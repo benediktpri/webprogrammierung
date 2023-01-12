@@ -11,7 +11,7 @@ function HomePage() {
   var Wombat = require('./img/wombat.jpg');
   var Map = require('./img/map.jpg');
   var Willy = require('./img/willy-abi.jpg');
-
+  var Logo = require("./img/logo.png")
 
   return (
 
@@ -19,7 +19,9 @@ function HomePage() {
     <div>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">WankyWombat</a>
+          <a className="navbar-brand" href="#">
+            <img src={Logo} className="logo" alt="..." />
+          </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">

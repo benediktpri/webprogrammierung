@@ -61,6 +61,12 @@ function ListPage() {
                     </div>
                 </div>
             </nav>
+            <div className="header">
+                <span className="name">Animal   </span>
+                <span className="location">Location </span>
+                <span className="description">Description   </span>
+                <span className="description">Timestamp </span>
+            </div>
             <div>
                 {reports.map((report) => (
                     <div key={report.id} className="report">
