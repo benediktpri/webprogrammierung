@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './imprint.css';
+import '../css/imprint.css';
 import React from 'react';
 
 import { Nav, Navbar } from 'react-bootstrap';
@@ -8,10 +8,7 @@ import { Link } from 'react-router-dom';
 
 function Imprint() {
 
-  var Wombat = require('./img/wombat.jpg');
-  var Map = require('./img/map.jpg');
-  var Willy = require('./img/willy-abi.jpg');
-  var Logo = require("./img/logo.png")
+  var Logo = require("../img/logo.png")
 
   return (
 

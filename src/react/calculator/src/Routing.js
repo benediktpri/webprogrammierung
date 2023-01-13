@@ -1,8 +1,8 @@
-import ReportPage from './ReportPage';
-import HomePage from './HomePage';
-import MapPage from './MapPage';
+import ReportPage from './pages/ReportPage';
+import HomePage from './pages/HomePage';
+import MapPage from './pages/MapPage';
 import ListPage from './ListPage';
-import Imprint from './Imprint';
+import Imprint from './pages/Imprint';
 import { Routes, Route } from 'react-router-dom';
 
 function Routing() {
