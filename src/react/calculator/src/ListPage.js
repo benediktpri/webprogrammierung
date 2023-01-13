@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './list.css';
 
 import React, { useState, useEffect } from 'react';
-import { getReports } from './DBConnector';
+import { getReports, deleteReport } from './DBConnector';
 import { Link } from 'react-router-dom';
 
 function ListPage() {
@@ -20,6 +20,18 @@ function ListPage() {
     useEffect(() => {
         fetchReports();
     }, []);
+
+    const handleDeleteReport = async (report) => {
+        if(report){
+            await deleteReport(report);
+            fetchReports();
+        }
+        else {
+            console.log("The report object is undefined");
+        }
+    
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-light">
@@ -74,6 +86,7 @@ function ListPage() {
                         <span className="location">{report.location}</span>
                         <span className="description">{report.description}</span>
                         <span className="description">{report.timestamp}</span>
+                        <button onClick={() => handleDeleteReport(report)} href="#" className="btn btn-primary d-flex justify-content-center">Resolve</button>
                     </div>
                 ))}
             </div>

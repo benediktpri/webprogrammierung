@@ -105,7 +105,7 @@ function MapPage() {
                     </div>
                 </div>
             </nav>
-            <div className="mt">Report Map, today: {moment(now()).format('MMMM Do ')}</div>
+            <div className="mt">Report Map, today: {moment(now()).format('MMMM Do')}</div>
             <div id="map">
                 <MapContainer center={position} zoom={13} maxZoom={18} minZoom={3}>
                     <TileLayer

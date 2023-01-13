@@ -5,6 +5,7 @@ import {
     doc,
     setDoc,
     getDocs,
+    deleteDoc,
     collection,
     query,
     where,
@@ -21,9 +22,10 @@ const firebaseConfig = {
     measurementId: "G-2N20PWN9Y6"
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app)
+const db = getFirestore(app);
 
 async function pushReport(name, location, description, timestamp) {
     // Add a new document in collection "cities"
@@ -47,13 +49,31 @@ async function getReports() {
     return data
 }
 
-async function getReport(attribute, comparator, state) {
-    const q = query(collection(db, "report"), where(attribute, comparator, state));
-    const querySnapshot = await getDocs(q);
+async function getReportsDoc() {
+    const querySnapshot = await getDocs(collection(db, "report"));
+    const data = [];
     querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        data.push(doc);
     });
-    return doc;
+    return data
 }
-export { pushReport, getReports, getReport }
+
+async function deleteReport(report) {
+
+    const docs = await getReportsDoc();
+
+    for (let i = 0; i < docs.length; i++) {
+        if (docs[i].data().description === report.description &&
+            docs[i].data().name === report.name &&
+            docs[i].data().location === report.location &&
+            docs[i].data().timestamp === report.timestamp) {
+            console.log(`Found reports with the description have been deleted.`);
+            console.log(docs[i]);
+            await deleteDoc(doc(db, "report", docs[i].id));
+        }
+    }
+}
+
+
+
+export { pushReport, getReports, deleteReport }
