@@ -1,7 +1,8 @@
-import ReportPage from './ReportPage';
-import HomePage from './HomePage';
-import MapPage from './MapPage';
+import ReportPage from './pages/ReportPage';
+import HomePage from './pages/HomePage';
+import MapPage from './pages/MapPage';
 import ListPage from './ListPage';
+import Imprint from './pages/Imprint';
 import { Routes, Route } from 'react-router-dom';
 
 function Routing() {
@@ -12,7 +13,7 @@ function Routing() {
             <Route path="/report" element={<ReportPage />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/list" element={<ListPage />} />
-            <Route path="/imprint" element={<ReportPage />} />
+            <Route path="/imprint" element={<Imprint />} />
         </Routes>
     );
 }

@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './report.css';
+import '../css/report.css';
 
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { pushReport } from './DBConnector';
+import { pushReport } from '../DBConnector';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';

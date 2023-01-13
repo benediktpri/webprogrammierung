@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './home.css';
+import '../css/home.css';
 import React from 'react';
 
 import { Nav, Navbar } from 'react-bootstrap';
@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
 
-  var Wombat = require('./img/wombat.jpg');
-  var Map = require('./img/map.jpg');
-  var Willy = require('./img/willy-abi.jpg');
-  var Logo = require("./img/logo.png")
+  var Wombat = require('../img/wombat.jpg');
+  var Map = require('../img/map.jpg');
+  var Willy = require('../img/willy-abi.jpg');
+  var Logo = require("../img/logo.png")
 
   return (
 

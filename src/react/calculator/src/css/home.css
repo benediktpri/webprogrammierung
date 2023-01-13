@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
 
+h1 {
 
+    text-align: end;
+
+}
 
 .hero {
-    background-image: url("img/snake.jpg");
+    background-image: url("../img/snake.jpg");
     /* width: 100%; */
     height: 100vh;
     background-size: cover;

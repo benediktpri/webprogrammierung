@@ -1,3 +1,5 @@
+/* Main CSS File with overall application design */
+
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
 
 .main {
@@ -9,8 +11,7 @@ h1 {
     font-family: 'Kanit', sans-serif;
     font-weight: 700;
     font-style: italic;
-    text-align: end;
-
+    /*text-align: end;*/
 }
 
 .btn {
