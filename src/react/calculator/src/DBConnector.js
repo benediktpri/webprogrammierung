@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import {getStorage} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 import {
     getFirestore,
     doc,
@@ -7,8 +8,6 @@ import {
     getDocs,
     deleteDoc,
     collection,
-    query,
-    where,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,6 +25,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 async function pushReport(name, location, description, timestamp) {
     // Add a new document in collection "cities"
@@ -67,6 +67,7 @@ async function deleteReport(report) {
             docs[i].data().name === report.name &&
             docs[i].data().location === report.location &&
             docs[i].data().timestamp === report.timestamp) {
+
             console.log(`Found reports with the description have been deleted.`);
             console.log(docs[i]);
             await deleteDoc(doc(db, "report", docs[i].id));
@@ -76,4 +77,5 @@ async function deleteReport(report) {
 
 
 
-export { pushReport, getReports, deleteReport }
+export { pushReport, getReports, deleteReport };
+export default storage;

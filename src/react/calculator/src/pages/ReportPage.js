@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
+import { ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+import storage from '../DBConnector';
 import { now } from "moment";
 import moment from "moment";
 
@@ -53,9 +55,42 @@ function ReportPage() {
   }
   function handleChange(event) {
     setOrtStr(event.target.value);
-    console.log("Change" + ort_str)
+    console.log("Change" + ort_str);
   }
 
+  const [file, setFile] = useState("");
+  const [percent, setPercent] = useState(0);
+
+  function handleChangeImg(event) {
+    setFile(event.target.files[0]);
+  }
+  function handleImageUpload() {
+    if (!file) {
+      alert("Please choose a file first!")
+    }
+
+    const storageRef = ref(storage, `/files/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+
+        // update progress
+        setPercent(percent);
+      },
+      (err) => console.log(err),
+      () => {
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log(url);
+        });
+      }
+    );
+  }
 
   return (
 
@@ -105,42 +140,44 @@ function ReportPage() {
 
           <div className="row">
             <div className="col-12 col-sm-3 mt-2 align-self-center">
-              <h1>Tier</h1>
+              <h1>Animal</h1>
             </div>
             <div className="col-12 col-sm-9 align-self-center">
-              <input {...register("tiername")} className="form-control" type="text" placeholder="Name des Tieres" aria-label="Name des Tieres"></input>
+              <input {...register("tiername")} className="form-control" type="text" placeholder="Name of the animal" aria-label="Name of the animal"></input>
             </div>
           </div>
 
           <div className="row">
             <div className="col-12 col-sm-3 mt-2 align-self-center">
-              <h1>Ort</h1>
+              <h1>Location</h1>
             </div>
             <div className="col-12 col-sm-7 align-self-center">
-              <input {...register("ort")} value={ort_str} onChange={handleChange} className="form-control" type="text" placeholder="Ort des Tieres" aria-label="Ort des Tieres"></input>
+              <input {...register("ort")} value={ort_str} onChange={handleChange} className="form-control" type="text" placeholder="Location of the animal" aria-label="Location of the animal"></input>
             </div>
             <div className="col-12 col-sm-2 align-self-center mt-2 mt-sm-0 d-flex just">
-              <button onClick={handleGpsClick} className="btn btn-primary d-flex justify-content-center ">GPS nutzen</button>
+              <button onClick={handleGpsClick} className="btn btn-primary d-flex justify-content-center ">use GPS</button>
             </div>
           </div>
 
           <div className="row">
             <div className="col-12 col-sm-3 mt-2 align-self-center">
-              <h1>Hinweis</h1>
+              <h1>Description</h1>
             </div>
             <div className="col-12 col-sm-9 align-self-center">
-              <input {...register("hinweis")} className="form-control" type="text" placeholder="Weitere Hinweise"
-                aria-label="Weitere Hinweise"></input>
+              <input {...register("hinweis")} className="form-control" type="text" placeholder="Additional descrption"
+                aria-label="Additional descrption"></input>
             </div>
           </div>
           <div className="row">
             <div className="col-12 mt-2 d-flex justify-content-center">
-              <button href="#" className="btn btn-primary d-flex justify-content-center">Foto aufnehmen</button></div>
+              <input type="file" accept="image/*" onChange={handleChangeImg} />
+            </div>
           </div>
           <div className="row">
             <div className="col-12 mt-5 d-flex justify-content-center">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <button href="#" className="btn btn-primary d-flex justify-content-center" type="submit">Report Animal</button>
+                <button onClick={handleImageUpload} href="#" className="btn btn-primary d-flex justify-content-center" type="submit">Report Animal</button>
+                <p>{percent} "% done"</p>
               </form>
             </div>
           </div>
