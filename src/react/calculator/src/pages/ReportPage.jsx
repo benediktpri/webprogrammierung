@@ -66,7 +66,7 @@ function ReportPage() {
   }
   function handleImageUpload() {
     if (!file) {
-      alert("Please choose a file first!")
+      alert("Please choose a Image first!")
     }
 
     const storageRef = ref(storage, `/files/${file.name}`)
@@ -169,7 +169,10 @@ function ReportPage() {
             </div>
           </div>
           <div className="row">
-            <div className="col-12 mt-2 d-flex justify-content-center">
+            <div className="col-12 col-sm-3 mt-2 align-self-center">
+              <h1>Image</h1>
+            </div>
+            <div className="col-12 col-sm-9 align-self-center">
               <input type="file" accept="image/*" onChange={handleChangeImg} />
             </div>
           </div>
