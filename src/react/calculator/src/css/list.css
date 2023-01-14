@@ -13,4 +13,8 @@
     flex: 1;
 }
 
+.list_btn {
+    margin: 5px;
+}
+
 /* TODO: fix how content is shown on small screens! */

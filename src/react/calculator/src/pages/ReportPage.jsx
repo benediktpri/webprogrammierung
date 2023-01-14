@@ -7,8 +7,8 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { pushReport } from '../DBConnector';
-import storage from '../DBConnector';
+import { storage, pushReport, updateTimestampDocURL } from '../DBConnector';
+import { v4 as uuidv4 } from 'uuid';
 import { ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 import { now } from "moment";
 import moment from "moment";
@@ -52,19 +52,19 @@ function ReportPage() {
     console.log("Change" + ort_str);
   }
 
+  //Store Images
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
 
   function handleChangeImg(event) {
     setFile(event.target.files[0]);
   }
-
   function handleImageUpload() {
     if (!file) {
       alert("Please choose a Image first!")
     }
 
-    const storageRef = ref(storage, `/files/${file.name}`)
+    const storageRef = ref(storage, `/files/${uuidv4()}`)
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -81,7 +81,7 @@ function ReportPage() {
       () => {
         // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
+          updateTimestampDocURL(moment(now()).format('MMMM Do YYYY, h:mm'), url);
         });
       }
     );

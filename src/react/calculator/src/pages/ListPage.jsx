@@ -33,7 +33,12 @@ function ListPage() {
         else {
             console.log("The report object is undefined");
         }
+    }
 
+    const handleShowImage = (report) => {
+        if (report.url) {
+            window.open(report.url);
+        }
     }
 
     return (
@@ -59,20 +64,26 @@ function ListPage() {
             <div className="heading"> {/* -- Heading --*/}
                 <div className="row">
                     <div className="col-3">Animal</div>
-                    <div className="col-3">Location</div>
+                    <div className="col-2">Location</div>
                     <div className="col-3">Note</div>
-                    <div className="col-3">Timestamp</div>
+                    <div className="col-2">Timestamp</div>
+                    <div className="col-2"></div>
                 </div>
             </div>
 
             <div> {/* -- List of reports -- */}
                 {reports.map((report) => (
-                    <div key={report.id} className="entry">
-                        <span className="data">{report.name}</span>
-                        <span className="data">{report.location}</span>
-                        <span className="data">{report.description}</span>
-                        <span className="data">{report.timestamp}</span>
-                        <button onClick={() => handleDeleteReport(report)} href="#" className="btn btn-primary d-flex justify-content-center">Resolve</button>
+                    <div key={report.id} className="entry row">
+                        <div className="col-3">{report.name}</div>
+                        <div className="col-2">{report.location}</div>
+                        <div className="col-3">{report.description}</div>
+                        <div className="col-2">{report.timestamp}</div>
+                        <div className="col-1">
+                            <button onClick={() => handleDeleteReport(report)} href="#" className="list_btn btn btn-primary d-flex justify-content-center">Resolve</button>
+                        </div>
+                        <div className="col-1">
+                            <button onClick={() => handleShowImage(report)} href="#" className="list_btn btn btn-primary d-flex justify-content-center">Image</button>
+                        </div>
                     </div>
                 ))}
             </div>

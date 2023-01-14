@@ -13,7 +13,6 @@ import moment from "moment";
 
 function MapPage() {
     var Logo = require("../img/logo.png")
-
     const [position, setPosition] = useState([49.487459, 8.466039]); // default to Mannheim, Germany
     const [reports, setReports] = useState([]);
     const redIcon = new L.Icon({
