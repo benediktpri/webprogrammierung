@@ -1,27 +1,24 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/report.css';
+import '../css/index.css';
 
 import React from 'react';
-import { useForm } from "react-hook-form";
-import { pushReport } from '../DBConnector';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
-
-import { ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+import { useForm } from "react-hook-form";
+import { pushReport } from '../DBConnector';
 import storage from '../DBConnector';
+import { ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 import { now } from "moment";
 import moment from "moment";
-
-import { Container, Nav, Navbar } from 'react-bootstrap';
-
+import emailjs from '@emailjs/browser';
 
 function ReportPage() {
 
   var Logo = require("../img/logo.png")
-
   const { register, handleSubmit, formState } = useForm();
-
+  const [ort_str, setOrtStr] = useState('');
 
   const onSubmit = (data) => {
     console.log(data);
@@ -37,27 +34,19 @@ function ReportPage() {
     console.log("Emails send")
   }
 
-  //const [latitude, setLat] = useState('LongitudeDefault');
-  //const [longitude, setLong] = useState('LatitudeDefault');
-  const [ort_str, setOrtStr] = useState('');
-
-
   const handleGpsClick = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      //setLat(position.coords.latitude);
-      //setLong(position.coords.longitude);
       setOrtStr(position.coords.latitude + ", " + position.coords.longitude);
-
       console.log("Clicked:" + ort_str);
 
     }, () => {
       // set default location to Mannheim, Germany if there is an error getting the user's position
-      //latitude = 49.487459;
-      //longitude = 8.466039;
+      // latitude = 49.487459;
+      // longitude = 8.466039;
       setOrtStr("failed")
     });
-
   }
+
   function handleChange(event) {
     setOrtStr(event.target.value);
     console.log("Change" + ort_str);
@@ -69,6 +58,7 @@ function ReportPage() {
   function handleChangeImg(event) {
     setFile(event.target.files[0]);
   }
+
   function handleImageUpload() {
     if (!file) {
       alert("Please choose a Image first!")
@@ -98,9 +88,8 @@ function ReportPage() {
   }
 
   return (
-
-    <div>
-      <Navbar bg="light" expand="md">
+    <div className="main">
+      <Navbar bg="light" expand="md"> {/* -- Navbar -- */}
         <Container>
           <Navbar.Brand><img alt="logo" src={Logo} className="logo d-inline-block align-top" />{' '}
             WankyWombat
@@ -112,55 +101,58 @@ function ReportPage() {
               <Link className="nav-link active" to="/report">Report</Link>
               <Link className="nav-link" to="/map">Map</Link>
               <Link className="nav-link" to="/list">List</Link>
-              <Link className="nav-link" to="/imprint">Impressum</Link>
+              <Link className="nav-link" to="/imprint">Imprint</Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      
 
-      <div className="main">
+      <div className="heading">Report Form</div> {/* -- Heading --*/}
+
+      <div>  {/* -- Input Form --*/}
         <div className="container">
 
-          <div className="row">
-            <div className="col-12 col-sm-3 mt-2 align-self-center">
-              <h1>Animal</h1>
+          <div className="row">  {/* -- Animal Input -- */}
+            <div className="col-12 col-md-3 mt-2 align-self-center">
+              <h1 className='label'>Animal</h1>
             </div>
-            <div className="col-12 col-sm-9 align-self-center">
+            <div className="col-12 col-md-9 align-self-center">
               <input {...register("tiername")} className="form-control" type="text" placeholder="Name of the animal" aria-label="Name of the animal"></input>
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-12 col-sm-3 mt-2 align-self-center">
-              <h1>Location</h1>
+          <div className="row">  {/* -- Location Input -- */}
+            <div className="col-12 col-md-3 mt-2 align-self-center">
+              <h1 className='label'>Location</h1>
             </div>
-            <div className="col-12 col-sm-7 align-self-center">
+            <div className="col-12 col-md-7 align-self-center">
               <input {...register("ort")} value={ort_str} onChange={handleChange} className="form-control" type="text" placeholder="Location of the animal" aria-label="Location of the animal"></input>
             </div>
-            <div className="col-12 col-sm-2 align-self-center mt-2 mt-sm-0 d-flex just">
-              <button onClick={handleGpsClick} className="btn btn-primary d-flex justify-content-center ">use GPS</button>
+            <div className="col-12 col-md-2 align-self-center mt-2 mt-md-0 d-flex justify-content-center">  {/* -- GPS Button -- */}
+              <button onClick={handleGpsClick} className="btn btn-primary d-flex justify-content-center">Use GPS</button>
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-12 col-sm-3 mt-2 align-self-center">
-              <h1>Description</h1>
+          <div className="row"> {/* -- Description Input -- */}
+            <div className="col-12 col-md-3 mt-2 align-self-center">
+              <h1 className='label'>Note</h1>
             </div>
-            <div className="col-12 col-sm-9 align-self-center">
-              <input {...register("hinweis")} className="form-control" type="text" placeholder="Additional descrption"
-                aria-label="Additional descrption"></input>
+            <div className="col-12 col-md-9 align-self-center">
+              <input {...register("hinweis")} className="form-control" type="text" placeholder="Additional note"
+                aria-label="Additional note"></input>
             </div>
           </div>
-          <div className="row">
-            <div className="col-12 col-sm-3 mt-2 align-self-center">
-              <h1>Image</h1>
+
+          <div className="row"> {/* -- Image Input -- */}
+            <div className="col-12 col-md-3 mt-2 align-self-center">
+              <h1 className='label'>Image</h1>
             </div>
-            <div className="col-12 col-sm-9 align-self-center">
+            <div className="col-12 col-md-9 align-self-center">
               <input type="file" accept="image/*" onChange={handleChangeImg} />
             </div>
           </div>
-          <div className="row">
+
+          <div className="row"> {/* -- Report Button -- */}
             <div className="col-12 mt-5 d-flex justify-content-center">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <button onClick={handleImageUpload} href="#" className="btn btn-primary d-flex justify-content-center" type="submit">Report Animal</button>

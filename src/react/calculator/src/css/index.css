@@ -1,33 +1,31 @@
 /* Main CSS File with overall application design */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
 
-body {
-    background-color: #c2c9b5;
-}
-
 .main {
     background-color:#c2c9b5;
-    height: 100vh;
+    font-family: 'Kanit', sans-serif;
+    min-height: 100vh;
 }
 
-h1 {
-    font-family: 'Kanit', sans-serif;
-    font-weight: 700;
-    font-style: italic;
-    /*text-align: end;*/
+.logo {
+    height: 30px;
+}
+
+.heading {
+    color: white;
+    font-weight: 900;
+    background-color: #596640;
+    height: 3em;
+    line-height: 3em;
+    padding-left: 2em;
 }
 
 .btn {
-    background-color: #596640 !important;
-    border: 0 !important;
+    background-color: #596640;
+    border: 0;
 }
 
 .btn-primary:hover{
-    background-color: #89a15c !important;
+    background-color: #89a15c;
 }
 
-@media screen and (max-width: 576px) {
-    h1 {
-        text-align: center;
-    }
-}

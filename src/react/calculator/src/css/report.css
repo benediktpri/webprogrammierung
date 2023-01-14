@@ -1,39 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
-
-.report {
-    display: flex;
-    flex-direction: row;
-}
-
-.name,
-.location,
-.description {
-    flex: 1;
-}
-
-.main {
-    background-color: #c2c9b5;
-    height: 100vh;
-}
-
-h1 {
-    font-family: 'Kanit', sans-serif;
+.label {
     font-weight: 700;
     font-style: italic;
     text-align: end;
 }
 
-.btn {
-    background-color: #596640 !important;
-    border: 0 !important;
-}
-
-.btn-primary:hover {
-    background-color: #89a15c !important;
-}
-
-@media screen and (max-width: 576px) {
-    h1 {
+@media screen and (max-width: 768px) {
+    .label {
         text-align: center;
     }
 }

@@ -1,17 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/maps.css';
+import '../css/index.css';
 
 import React, { useState, useEffect } from 'react';
-
-import { getReports } from '../DBConnector';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { getReports } from '../DBConnector';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet';
 import { now } from "moment";
 import moment from "moment";
-
-import { Container, Nav, Navbar } from 'react-bootstrap';
-
 
 function MapPage() {
     var Logo = require("../img/logo.png")
@@ -26,6 +24,7 @@ function MapPage() {
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     });
+
     async function fetchReports() {
         try {
             const data = await getReports();
@@ -33,6 +32,7 @@ function MapPage() {
                 // split location string on ',' and check if there are two numbers
                 const locationParts = report.location.split(',');
                 if (locationParts.length !== 2 || isNaN(locationParts[0]) || isNaN(locationParts[1])) {
+                    //TODO: not random location if false location string but just in list an no mapping at all
                     // generate random longitude and latitude
                     const longitude = Math.random() * 180 - 90; // range: -90 to 90
                     const latitude = Math.random() * 360 - 180; // range: -180 to 180
@@ -67,11 +67,9 @@ function MapPage() {
         setPosition([49.487459, 8.466039]);
     });
 
-
-
     return (
-        <div>
-            <Navbar bg="light" expand="md">
+        <div className="main">
+            <Navbar bg="light" expand="md"> {/* -- Navbar -- */}
                 <Container>
                     <Navbar.Brand><img alt="logo" src={Logo} className="logo d-inline-block align-top" />{' '}
                         WankyWombat
@@ -83,18 +81,17 @@ function MapPage() {
                             <Link className="nav-link" to="/report">Report</Link>
                             <Link className="nav-link active" to="/map">Map</Link>
                             <Link className="nav-link" to="/list">List</Link>
-                            <Link className="nav-link" to="/imprint">Impressum</Link>
+                            <Link className="nav-link" to="/imprint">Imprint</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            
-            <div className="mt">Report Map, today: {moment(now()).format('MMMM Do')}</div>
-            <div id="map">
+
+            <div className="heading">Report Map, today: {moment(now()).format('MMMM Do')}</div> {/* -- Heading --*/}
+
+            <div> {/* -- Map --*/}
                 <MapContainer center={position} zoom={13} maxZoom={18} minZoom={3}>
-                    <TileLayer
-                        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
+                    <TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
                     <Marker position={position}>
                         <Popup>
                             Your location!
@@ -122,6 +119,7 @@ function MapPage() {
                     })}
                 </MapContainer>
             </div>
+
             <script
                 src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
