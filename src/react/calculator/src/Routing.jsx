@@ -1,7 +1,7 @@
 import ReportPage from './pages/ReportPage';
 import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
-import ListPage from './ListPage';
+import ListPage from './pages/ListPage';
 import Imprint from './pages/Imprint';
 import { Routes, Route } from 'react-router-dom';
 

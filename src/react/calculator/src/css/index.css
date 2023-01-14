@@ -1,6 +1,9 @@
 /* Main CSS File with overall application design */
-
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;1,400;1,600;1,800&display=swap');
+
+body {
+    background-color: #c2c9b5;
+}
 
 .main {
     background-color:#c2c9b5;
@@ -27,5 +30,4 @@ h1 {
     h1 {
         text-align: center;
     }
-
 }

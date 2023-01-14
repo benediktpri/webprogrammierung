@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './list.css';
+import '../css/list.css';
 
 import React, { useState, useEffect } from 'react';
-import { getReports, deleteReport } from './DBConnector';
+import { getReports, deleteReport } from '../DBConnector';
 import { Link } from 'react-router-dom';
 
 function ListPage() {
