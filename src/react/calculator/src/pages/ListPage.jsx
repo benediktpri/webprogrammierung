@@ -6,6 +6,9 @@ import { getReports, deleteReport } from '../DBConnector';
 import { Link } from 'react-router-dom';
 
 function ListPage() {
+
+    var Logo = require("../img/logo.png")
+
     const [reports, setReports] = useState([]);
 
     async function fetchReports() {
@@ -22,21 +25,28 @@ function ListPage() {
     }, []);
 
     const handleDeleteReport = async (report) => {
-        if(report){
+        if (report) {
             await deleteReport(report);
             fetchReports();
         }
         else {
             console.log("The report object is undefined");
         }
-    
+    }
+
+    const handleShowImage = (report) => {
+        if (report.url) {
+            window.open(report.url);
+        }
     }
 
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-light">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">WankyWombat</a>
+                    <a className="navbar-brand" href="#">
+                        <img src={Logo} className="logo" alt="..." />
+                    </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -87,6 +97,7 @@ function ListPage() {
                         <span className="description">{report.description}</span>
                         <span className="description">{report.timestamp}</span>
                         <button onClick={() => handleDeleteReport(report)} href="#" className="btn btn-primary d-flex justify-content-center">Resolve</button>
+                        <button onClick={() => handleShowImage(report)} href="#" className="btn btn-primary d-flex justify-content-center">Image</button>
                     </div>
                 ))}
             </div>

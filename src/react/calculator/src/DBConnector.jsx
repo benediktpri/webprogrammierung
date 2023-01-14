@@ -1,12 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-import {getStorage} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 import {
     getFirestore,
     doc,
+    query,
+    where,
     setDoc,
     getDocs,
     deleteDoc,
+    updateDoc,
     collection,
 } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 import { v4 as uuidv4 } from 'uuid';
@@ -33,7 +36,7 @@ async function pushReport(name, location, description, timestamp) {
         name: name,
         location: location,
         description: description,
-        timestamp: timestamp
+        timestamp: timestamp,
     });
     console.log(`pushed ${name} at ${location} with ${description} at ${timestamp} to database.`)
 }
@@ -49,8 +52,36 @@ async function getReports() {
     return data
 }
 
-async function getReportsDoc() {
-    const querySnapshot = await getDocs(collection(db, "report"));
+async function getReportDocQuery(key, operator, value) {
+
+    const q = query(collection(db, "report"), where(key, operator, value));
+
+    const querySnapshot = await getDocs(q);
+    const data = [];
+    querySnapshot.forEach((doc) => {
+        data.push(doc);
+    });
+    return data
+}
+
+async function updateTimestampDocURL(timestamp, url) {
+
+    const reports = await getReportDocQuery("timestamp", "==", timestamp);
+    for (let i = 0; i < reports.length; i++) {
+        await updateDoc(doc(db, "report", reports[i].id), {
+            url: url
+        })
+    }
+}
+
+async function getReportsDoc(report) {
+
+    const q = query(collection(db, "report"),
+        where("description", "==", report.description),
+        where("location", "==", report.location),
+        where("timestamp", "==", report.timestamp));
+
+    const querySnapshot = await getDocs(q);
     const data = [];
     querySnapshot.forEach((doc) => {
         data.push(doc);
@@ -60,22 +91,14 @@ async function getReportsDoc() {
 
 async function deleteReport(report) {
 
-    const docs = await getReportsDoc();
+    const docs = await getReportsDoc(report);
 
     for (let i = 0; i < docs.length; i++) {
-        if (docs[i].data().description === report.description &&
-            docs[i].data().name === report.name &&
-            docs[i].data().location === report.location &&
-            docs[i].data().timestamp === report.timestamp) {
-
-            console.log(`Found reports with the description have been deleted.`);
-            console.log(docs[i]);
-            await deleteDoc(doc(db, "report", docs[i].id));
-        }
+        await deleteDoc(doc(db, "report", docs[i].id));
     }
 }
 
 
 
-export { pushReport, getReports, deleteReport };
+export { pushReport, getReports, deleteReport, updateTimestampDocURL };
 export default storage;

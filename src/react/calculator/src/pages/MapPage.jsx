@@ -13,6 +13,7 @@ import moment from "moment";
 function MapPage() {
     const [position, setPosition] = useState([49.487459, 8.466039]); // default to Mannheim, Germany
     const [reports, setReports] = useState([]);
+    var Logo = require("../img/logo.png")
     const redIcon = new L.Icon({
         iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -68,7 +69,9 @@ function MapPage() {
         <div>
             <nav className="navbar navbar-expand-lg bg-light">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#">WankyWombat</a>
+                    <a className="navbar-brand" href="#">
+                        <img src={Logo} className="logo" alt="..." />
+                    </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -116,7 +119,7 @@ function MapPage() {
                             Your location!
                         </Popup>
                     </Marker>
-                    
+
                     {/* // KOMMENTAR (ist besser im html teil von react nicht möglich): zeile 125 bis 132 erzeugt im hintergrund der karte eine tabelle. ich vermute das durch das map jedes mal ein neuer div erzeugt wird welcher dann ohne inhalt angezeigt wird. 
                     // vielleicht gibt es eine alternative zum div?? --> erste lösung: className="report" aus dem div genommen weil klasse report im list css mit farbe und border definiert ist. hintergrund der map ist noch anders als untern */}
                     {reports.map((report) => {
