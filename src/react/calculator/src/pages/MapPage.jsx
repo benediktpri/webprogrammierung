@@ -10,7 +10,12 @@ import L from 'leaflet';
 import { now } from "moment";
 import moment from "moment";
 
+import { Container, Nav, Navbar } from 'react-bootstrap';
+
+
 function MapPage() {
+    var Logo = require("../img/logo.png")
+
     const [position, setPosition] = useState([49.487459, 8.466039]); // default to Mannheim, Germany
     const [reports, setReports] = useState([]);
     var Logo = require("../img/logo.png")
@@ -67,47 +72,24 @@ function MapPage() {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-light">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">
-                        <img src={Logo} className="logo" alt="..." />
-                    </a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link to="/home" className="nav-link">
-                                    Home
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/report" className="nav-link">
-                                    Report
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/map" className="nav-link active">
-                                    Map
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/list" className="nav-link">
-                                    List
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/imprint" className="nav-link">
-                                    Impressum
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <Navbar bg="light" expand="md">
+                <Container>
+                    <Navbar.Brand><img alt="logo" src={Logo} className="logo d-inline-block align-top" />{' '}
+                        WankyWombat
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <Link className="nav-link" to="/home">Home</Link>
+                            <Link className="nav-link" to="/report">Report</Link>
+                            <Link className="nav-link active" to="/map">Map</Link>
+                            <Link className="nav-link" to="/list">List</Link>
+                            <Link className="nav-link" to="/imprint">Impressum</Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            
             <div className="mt">Report Map, today: {moment(now()).format('MMMM Do')}</div>
             <div id="map">
                 <MapContainer center={position} zoom={13} maxZoom={18} minZoom={3}>
