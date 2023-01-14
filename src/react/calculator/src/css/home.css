@@ -8,13 +8,10 @@ h1 {
 
 .hero {
     background-image: url("../img/snake.jpg");
-    /* width: 100%; */
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    /* background-attachment: fixed; */
-    /*this makes the text scroll over image  */
     position: relative;
     padding-bottom: 50%;
 }
