@@ -41,6 +41,13 @@ function HomePage() {
           <div className="row">
             <div id="claim" className="col-12">Report Dangerous Animals.<br /> Instantly.</div>
           </div>
+          <div className="row">
+            <div className="col-12">
+              <Link to="/report" id="cta" className="btn btn-primary justify-content-center mt-3">
+                Report now
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 

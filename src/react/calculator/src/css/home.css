@@ -22,6 +22,14 @@
     width: fit-content;
 }
 
+#cta {
+    font-size: 30px;
+    font-weight: 600;
+    position: relative;
+    top: 20vh; 
+    left: 75vw;
+}
+
 .cards {
     background-color: #08090b;
 }
@@ -55,4 +63,8 @@
         font-size: 30px;
     }
 
+    #cta {
+        font-size: 30px;
+        position: inherit;
+    }
 }
