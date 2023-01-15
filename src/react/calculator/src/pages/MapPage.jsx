@@ -103,11 +103,11 @@ function MapPage() {
                                 <div key={report.id}>
                                     <Marker position={report.location} icon={redIcon}>
                                         <Popup>
-                                            <img src={report.url} />
+                                            <div><img id='map_image' src={report.url} alt="no upload by user"/></div>
 
-                                            <br /> {report.name}
-                                            <br /> {report.description}
-                                            <br /> {report.timestamp}
+                                            <div className="map_text">{report.name}</div>
+                                            <div className="map_text">{report.description}</div>
+                                            <div className="map_text">{report.timestamp}</div>
                                         </Popup>
                                     </Marker>
                                 </div>
