@@ -63,22 +63,22 @@ function ListPage() {
 
             <div className="heading"> {/* -- Heading --*/}
                 <div className="row">
-                    <div className="col-3">Animal</div>
-                    <div className="col-2">Location</div>
-                    <div className="col-3">Note</div>
-                    <div className="col-2">Timestamp</div>
-                    <div className="col-2"></div>
+                    <div className="col-sm-3">Animal</div>
+                    <div className="col-sm-2">Location</div>
+                    <div className="col-sm-3">Note</div>
+                    <div className="col-sm-2">Timestamp</div>
+                    <div className="col-sm-2"></div>
                 </div>
             </div>
 
             <div> {/* -- List of reports -- */}
                 {reports.map((report) => (
                     <div key={report.id} className="entry row">
-                        <div className="col-3">{report.name}</div>
-                        <div className="col-2">{report.location}</div>
-                        <div className="col-3">{report.description}</div>
-                        <div className="col-2">{report.timestamp}</div>
-                        <div className="col-1">
+                        <div className="col-sm-3">{report.name}</div>
+                        <div className="col-sm-2">{report.location}</div>
+                        <div className="col-sm-3">{report.description}</div>
+                        <div className="col-sm-2">{report.timestamp}</div>
+                        <div className="col-sm-1">
                             <button onClick={() => handleDeleteReport(report)} href="#" className="list_btn btn btn-primary d-flex justify-content-center">Resolve</button>
                         </div>
                         <div className="col-1">

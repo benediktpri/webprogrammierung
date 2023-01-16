@@ -96,9 +96,6 @@ function MapPage() {
                             Your location!
                         </Popup>
                     </Marker>
-
-                    {/* // KOMMENTAR (ist besser im html teil von react nicht möglich): zeile 125 bis 132 erzeugt im hintergrund der karte eine tabelle. ich vermute das durch das map jedes mal ein neuer div erzeugt wird welcher dann ohne inhalt angezeigt wird. 
-                    // vielleicht gibt es eine alternative zum div?? --> erste lösung: className="report" aus dem div genommen weil klasse report im list css mit farbe und border definiert ist. hintergrund der map ist noch anders als untern */}
                     {reports.map((report) => {
                         if (Array.isArray(report.location) && report.location.length === 2 &&
                             typeof report.location[0] === 'number' && typeof report.location[1] === 'number') {
@@ -106,11 +103,10 @@ function MapPage() {
                                 <div key={report.id}>
                                     <Marker position={report.location} icon={redIcon}>
                                         <Popup>
-                                            <img src={report.url} alt="<no image>"/>
-
-                                            <br /> {report.name}
-                                            <br /> {report.description}
-                                            <br /> {report.timestamp}
+                                            <div><img id='map_image' src={report.url} alt="no upload by user"/></div>
+                                            <div className="map_text">{report.name}</div>
+                                            <div className="map_text">{report.description}</div>
+                                            <div className="map_text">{report.timestamp}</div>
                                         </Popup>
                                     </Marker>
                                 </div>

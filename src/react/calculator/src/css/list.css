@@ -2,11 +2,8 @@
     color: black;
     background-color: #c2c9b5;
     border: solid grey 1px;
-    height: 3em;
-    line-height: 3em;
+    line-height: 2em;
     padding-left: 2em;
-    display: flex;
-    flex-direction: row;
 }
 
 .data {
@@ -17,4 +14,3 @@
     margin: 5px;
 }
 
-/* TODO: fix how content is shown on small screens! */
