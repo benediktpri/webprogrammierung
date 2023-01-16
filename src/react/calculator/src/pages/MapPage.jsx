@@ -106,7 +106,7 @@ function MapPage() {
                                 <div key={report.id}>
                                     <Marker position={report.location} icon={redIcon}>
                                         <Popup>
-                                            <img src={report.url} />
+                                            <img src={report.url} alt="<no image>"/>
 
                                             <br /> {report.name}
                                             <br /> {report.description}
