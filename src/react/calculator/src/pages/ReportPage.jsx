@@ -17,48 +17,46 @@ import emailjs from '@emailjs/browser';
 function ReportPage() {
 
   var Logo = require("../img/logo.png")
-  const { register, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm(); //TODO: REMOVE formState??
   const [ort_str, setOrtStr] = useState('');
 
+  // Button "Report Animal"
   const onSubmit = (data) => {
     console.log(data);
-    pushReport(data.tiername, ort_str, data.hinweis, moment(now()).format('MMMM Do YYYY, h:mm'));
+    pushReport(data.tiername, ort_str, data.hinweis, moment(now()).format('MMMM Do YYYY, h:mm')); // Daten werden in die Firebase-Datenbank geschrieben
+    
     var mail_values = {
       animal: data.tiername,
       location: ort_str,
       info: data.hinweis,
-      email: 'felix.2001@web.de' // Emailadress of ranger
+      email: 'wanky.wombat@gmail.com' // Hier kann die Emailadresse, der Person eingegeben werden, welche eine Benachrichtigung über neue Meldungen bekommen soll.
     };
-    /*e.preventDefau
-    /*emailjs.send('service_sxdzo4f', 'template_0o7vawb', mail_values, 'eY3vlgIfp7iXz3CD0');*/ //no spam pls. only 200 per month
+    emailjs.send('service_sxdzo4f', 'template_0o7vawb', mail_values, 'eY3vlgIfp7iXz3CD0'); // sending email with data
     console.log("Emails send")
   }
 
+  // Button "Use GPS"
   const handleGpsClick = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       setOrtStr(position.coords.latitude + ", " + position.coords.longitude);
-      console.log("Clicked:" + ort_str);
-
     }, () => {
-      // set default location to Mannheim, Germany if there is an error getting the user's position
-      // latitude = 49.487459;
-      // longitude = 8.466039;
-      setOrtStr("failed")
+      setOrtStr("failed") // locatin is set to "failed" if there is an error getting the user's position
     });
   }
 
-  function handleChange(event) {
+  function handleChangeGPS(event) {
     setOrtStr(event.target.value);
-    console.log("Change" + ort_str);
+    console.log("Change: " + ort_str);
   }
 
-  //Store Images
+  // Store Images
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
 
   function handleChangeImg(event) {
     setFile(event.target.files[0]);
   }
+
   function handleImageUpload() {
     if (!file) {
       alert("Please choose a Image first!")
@@ -126,7 +124,7 @@ function ReportPage() {
               <h1 className='label'>Location</h1>
             </div>
             <div className="col-12 col-md-7 align-self-center">
-              <input {...register("ort")} value={ort_str} onChange={handleChange} className="form-control" type="text" placeholder="Location of the animal" aria-label="Location of the animal"></input>
+              <input {...register("ort")} value={ort_str} onChange={handleChangeGPS} className="form-control" type="text" placeholder="Location of the animal" aria-label="Location of the animal"></input>
             </div>
             <div className="col-12 col-md-2 align-self-center mt-2 mt-md-0 d-flex justify-content-center">  {/* -- GPS Button -- */}
               <button onClick={handleGpsClick} className="btn btn-primary d-flex justify-content-center">Use GPS</button>

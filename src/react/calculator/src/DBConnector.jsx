@@ -99,4 +99,4 @@ async function deleteReport(report) {
 }
 
 export { pushReport, getReports, deleteReport, updateTimestampDocURL, storage };
-export default storage; //TODO: can this be removed?
+export default storage; //TODO: can this be removed????

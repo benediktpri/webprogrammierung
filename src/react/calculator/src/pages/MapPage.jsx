@@ -31,7 +31,6 @@ function MapPage() {
                 // split location string on ',' and check if there are two numbers
                 const locationParts = report.location.split(',');
                 if (locationParts.length !== 2 || isNaN(locationParts[0]) || isNaN(locationParts[1])) {
-                    //TODO: not random location if false location string but just in list an no mapping at all
                     // generate random longitude and latitude
                     const longitude = Math.random() * 180 - 90; // range: -90 to 90
                     const latitude = Math.random() * 360 - 180; // range: -180 to 180

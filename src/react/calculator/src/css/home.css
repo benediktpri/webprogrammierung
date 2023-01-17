@@ -25,9 +25,6 @@
 #cta {
     font-size: 30px;
     font-weight: 600;
-    position: relative;
-    top: 20vh; 
-    left: 75vw;
 }
 
 .cards {
@@ -52,7 +49,7 @@
 @media screen and (max-width: 768px) {
 
     .hero {
-        height: 80vh;
+        height: 60vh;
     }
     
     #titel {
@@ -64,7 +61,6 @@
     }
 
     #cta {
-        font-size: 30px;
-        position: inherit;
+        font-size: 25px;
     }
 }

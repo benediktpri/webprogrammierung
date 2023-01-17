@@ -25,6 +25,7 @@ function ListPage() {
         fetchReports();
     }, []);
 
+    // Button "Resolve"
     const handleDeleteReport = async (report) => {
         if (report) {
             await deleteReport(report);
@@ -35,6 +36,7 @@ function ListPage() {
         }
     }
 
+    // Button "Image"
     const handleShowImage = (report) => {
         if (report.url) {
             window.open(report.url);
