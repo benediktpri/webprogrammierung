@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-storage.js";
 import {
@@ -41,7 +40,7 @@ async function pushReport(name, location, description, timestamp) {
 }
 
 async function getReports() {
-    
+
     const querySnapshot = await getDocs(collection(db, "report"));
     const data = [];
     querySnapshot.forEach((doc) => {
