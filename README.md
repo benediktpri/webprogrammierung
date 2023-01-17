@@ -1,6 +1,9 @@
+Lasse und Benedikt<br>
 Projekt Web-Programmierung <br>
 DHBW Mannheim 2023 <br><br>
+Eine einfache Webanwendung zum Melden von Tierbegegnungen. 
 
+---
 
 Status und ToDos:
 
