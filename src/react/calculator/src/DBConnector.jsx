@@ -31,7 +31,6 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 async function pushReport(name, location, description, timestamp) {
-    // Add a new document in collection "cities"
     await setDoc(doc(db, "report", uuidv4()), {
         name: name,
         location: location,
@@ -42,10 +41,10 @@ async function pushReport(name, location, description, timestamp) {
 }
 
 async function getReports() {
+    
     const querySnapshot = await getDocs(collection(db, "report"));
     const data = [];
     querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
         data.push(doc.data());
     });
@@ -55,9 +54,9 @@ async function getReports() {
 async function getReportDocQuery(key, operator, value) {
 
     const q = query(collection(db, "report"), where(key, operator, value));
-
     const querySnapshot = await getDocs(q);
     const data = [];
+
     querySnapshot.forEach((doc) => {
         data.push(doc);
     });
@@ -99,4 +98,3 @@ async function deleteReport(report) {
 }
 
 export { pushReport, getReports, deleteReport, updateTimestampDocURL, storage };
-export default storage; //TODO: can this be removed????

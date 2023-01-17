@@ -32,11 +32,11 @@ function MapPage() {
                 const locationParts = report.location.split(',');
                 if (locationParts.length !== 2 || isNaN(locationParts[0]) || isNaN(locationParts[1])) {
                     // generate random longitude and latitude
-                    const longitude = Math.random() * 180 - 90; // range: -90 to 90
-                    const latitude = Math.random() * 360 - 180; // range: -180 to 180
+                    const latitude = Math.random() * 180 - 90; // range: -90 to 90
+                    const longitude = Math.random() * 360 - 180; // range: -180 to 180
                     return {
                         ...report,
-                        location: [longitude, latitude],
+                        location: [latitude, longitude],
                     };
                 } else {
                     // parse location strings as floats

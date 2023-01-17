@@ -17,7 +17,7 @@ import emailjs from '@emailjs/browser';
 function ReportPage() {
 
   var Logo = require("../img/logo.png")
-  const { register, handleSubmit, formState } = useForm(); //TODO: REMOVE formState??
+  const { register, handleSubmit} = useForm();
   const [ort_str, setOrtStr] = useState('');
 
   // Button "Report Animal"

@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/imprint.css';
 import '../css/index.css';
 
 import React from 'react';
